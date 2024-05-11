@@ -2,8 +2,14 @@ package com.usmobile.usermanagment.service;
 
 import com.usmobile.usermanagment.model.User;
 import com.usmobile.usermanagment.repository.UserRepository;
+import com.usmobile.usermanagment.utils.EncryptionUtil;
 import com.usmobile.usermanagment.utils.ValidationUtil;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import java.security.NoSuchAlgorithmException;
+
 
 @Service
 public class UserManagementService {
@@ -12,9 +18,21 @@ public class UserManagementService {
     UserManagementService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public User createUser(User user) {
+    public User createUser(User user) throws Exception{
+        User userDAO;
         ValidationUtil.validateUser(user);
-        return userRepository.save(user);
+        try {
+            user.setPassword(EncryptionUtil.encode(user.getPassword()));
+            userDAO= userRepository.insert(user);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        } catch (DuplicateKeyException e) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Record already exists");
+        }
+
+        return userDAO;
 
     }
+
+
 }

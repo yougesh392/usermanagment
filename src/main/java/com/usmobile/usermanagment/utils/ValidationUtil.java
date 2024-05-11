@@ -1,6 +1,8 @@
 package com.usmobile.usermanagment.utils;
 
 import com.usmobile.usermanagment.model.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 public class ValidationUtil {
     private static boolean isValidEmail(String email) {
@@ -20,20 +22,20 @@ public class ValidationUtil {
     }
 
     public static void validateUser(User user) {
-        if (!isValidEmail(user.getEmail())) {
-            throw new IllegalArgumentException("Invalid email");
+        if (user.getEmail()== null || !isValidEmail(user.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email cannot be empty or invalid");
         }
-        if (!isValidPhoneNumber(user.getPhoneNumber())) {
-            throw new IllegalArgumentException("Invalid phone number");
+        if (user.getPhoneNumber() == null || !isValidPhoneNumber(user.getPhoneNumber())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "phone number cannot be empty or invalid");
         }
-        if (!isValidPassword(user.getPassword())) {
-            throw new IllegalArgumentException("Invalid password");
+        if (user.getPassword() == null || !isValidPassword(user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "password cannot be empty or less than 8 characters");
         }
-        if (!isValidName(user.getFirstName())) {
-            throw new IllegalArgumentException("Invalid first name");
+        if (user.getFirstName() == null || !isValidName(user.getFirstName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "first name cannot be empty or invalid");
         }
-        if (!isValidName(user.getLastName())) {
-            throw new IllegalArgumentException("Invalid last name");
+        if (user.getLastName() == null || !isValidName(user.getLastName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "last cannot be empty or invalid");
         }
     }
 }
