@@ -13,7 +13,6 @@ public class EncryptionUtil {
         return Base64.getEncoder().encodeToString(hash);
 
     }
-
     private static byte[] decode(String encodedPassword) {
         return Base64.getDecoder().decode(encodedPassword);
     }

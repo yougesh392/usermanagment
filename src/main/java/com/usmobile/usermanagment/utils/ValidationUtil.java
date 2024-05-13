@@ -1,6 +1,6 @@
 package com.usmobile.usermanagment.utils;
 
-import com.usmobile.usermanagment.model.User;
+import com.usmobile.usermanagment.DTO.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,7 +21,7 @@ public class ValidationUtil {
         return name.matches("^[a-zA-Z]*$");
     }
 
-    public static void validateUser(User user) {
+    public static void validateUser(UserDTO user) {
         if (user.getEmail()== null || !isValidEmail(user.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email cannot be empty or invalid");
         }

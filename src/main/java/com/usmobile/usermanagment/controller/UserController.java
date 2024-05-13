@@ -1,6 +1,6 @@
 package com.usmobile.usermanagment.controller;
 
-import com.usmobile.usermanagment.model.User;
+import com.usmobile.usermanagment.DTO.UserDTO;
 import com.usmobile.usermanagment.service.UserManagementService;
 import com.usmobile.usermanagment.utils.ApiError;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,11 +37,12 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiError.class))),
     })
-    public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
-        User createdUser = userManagementService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) throws Exception {
+        UserDTO createdUser = userManagementService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
+    // TODO: Make a global exception handler
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ApiError> handleResponseStatusException(ResponseStatusException ex) {
         ApiError errorDetails = new ApiError(ex.getStatusCode().value(), ex.getReason());
