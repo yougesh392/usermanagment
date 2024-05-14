@@ -1,6 +1,7 @@
 package com.usmobile.usermanagment.service;
 
 import com.usmobile.usermanagment.DAO.UserDAO;
+import com.usmobile.usermanagment.DTO.UpdateUserDTO;
 import com.usmobile.usermanagment.DTO.UserDTO;
 import com.usmobile.usermanagment.repository.UserRepository;
 import com.usmobile.usermanagment.utils.EncryptionUtil;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 
 @Service
@@ -32,6 +34,26 @@ public class UserManagementService {
             throw new RuntimeException("Error hashing password", e);
         } catch (DuplicateKeyException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Record already exists");
+        }
+        return user;
+    }
+    public UpdateUserDTO updateUser(UpdateUserDTO user) throws Exception{
+        ValidationUtil.validateUpdateUser(user);
+        Optional<UserDAO> optionalUserDAO = userRepository.findById(user.getUserId());
+        if (optionalUserDAO.isPresent()) {
+            UserDAO existingUser = optionalUserDAO.get();
+            if (user.getFirstName() != null) {
+                existingUser.setFirstName(user.getFirstName());
+            }
+            if (user.getLastName() != null) {
+                existingUser.setLastName(user.getLastName());
+            }
+            if (user.getEmail() != null) {
+                existingUser.setEmail(user.getEmail());
+            }
+            userRepository.save(existingUser);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
         return user;
     }

@@ -1,5 +1,6 @@
 package com.usmobile.usermanagment.utils;
 
+import com.usmobile.usermanagment.DTO.UpdateUserDTO;
 import com.usmobile.usermanagment.DTO.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -8,7 +9,6 @@ public class ValidationUtil {
     private static boolean isValidEmail(String email) {
         return email.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
     }
-
     private static boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber.matches("^[0-9]{10}$");
     }
@@ -30,6 +30,20 @@ public class ValidationUtil {
         }
         if (user.getPassword() == null || !isValidPassword(user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "password cannot be empty or less than 8 characters");
+        }
+        if (user.getFirstName() == null || !isValidName(user.getFirstName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "first name cannot be empty or invalid");
+        }
+        if (user.getLastName() == null || !isValidName(user.getLastName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "last cannot be empty or invalid");
+        }
+    }
+    public static void validateUpdateUser(UpdateUserDTO user) {
+        if (user.getEmail()== null || !isValidEmail(user.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email cannot be empty or invalid");
+        }
+        if (user.getUserId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserId cannot be empty or invalid");
         }
         if (user.getFirstName() == null || !isValidName(user.getFirstName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "first name cannot be empty or invalid");
