@@ -57,6 +57,18 @@ public class UserManagementService {
         }
         return user;
     }
+    /*
+    * checks if user exists and returns the user
+    * */
+    public UserDTO getUser(String userId) throws Exception{
+        Optional<UserDAO> optionalUserDAO = userRepository.findById(userId);
+        if (optionalUserDAO.isPresent()) {
+            UserDAO existingUser = optionalUserDAO.get();
+            return UserMapper.daoToDto(existingUser);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+    }
 
 
 }

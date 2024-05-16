@@ -13,4 +13,14 @@ public class UserMapper {
         user.setPhoneNumber(userDTO.getPhoneNumber());
         return user;
     }
+    public static UserDTO daoToDto(UserDAO userDAO) {
+        UserDTO user = new UserDTO();
+        user.setUserId(userDAO.getId());
+        user.setFirstName(userDAO.getFirstName());
+        user.setLastName(userDAO.getLastName());
+        user.setEmail(userDAO.getEmail());
+        user.setPassword(userDAO.getPassword());
+        user.setPhoneNumber(userDAO.getPhoneNumber());
+        return user;
+    }
 }

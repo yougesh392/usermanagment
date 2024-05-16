@@ -29,6 +29,7 @@ public class UserDAO {
     private String password;
     @Indexed(unique = true)
     private String phoneNumber;
+    private String previousPhoneNumber;
     @CreatedDate
     private Instant createdDate;
     @LastModifiedDate

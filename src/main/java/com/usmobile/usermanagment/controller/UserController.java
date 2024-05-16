@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping
-    @Operation(summary = "Create a new user", description = "Create a new user and return the created user")
+    @Operation(summary = "Update a existing user", description = "Create a new user and return the created user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid user request",
@@ -54,7 +54,12 @@ public class UserController {
         UpdateUserDTO createdUser = userManagementService.updateUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
-
+    @GetMapping("/{userId}")
+    @Operation(summary = "Get a existing user", description = "return the existing user")
+    public ResponseEntity<UserDTO> getUser(@PathVariable String userId) throws Exception {
+        UserDTO user = userManagementService.getUser(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
 
 }

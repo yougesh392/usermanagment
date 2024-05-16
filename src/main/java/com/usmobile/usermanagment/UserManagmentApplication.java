@@ -23,15 +23,17 @@ public class UserManagmentApplication {
 	@Bean
 	CommandLineRunner runner(UserRepository userRepository) {
 		return args -> {
-			for (int i = 1; i <= 10; i++) {
-				UserDAO user = new UserDAO();
-				user.setFirstName("Test" + i);
-				user.setLastName("User");
-				user.setEmail("test" + i + "@example.com");
-				user.setPassword(EncryptionUtil.encode("password"));
-				user.setPhoneNumber("123456789" + i);
-				userRepository.save(user);
-			}
+
+
+//			for (int i = 1; i <= 10; i++) {
+//				UserDAO user = new UserDAO();
+//				user.setFirstName("Test" + i);
+//				user.setLastName("User");
+//				user.setEmail("test" + i + "@example.com");
+//				user.setPassword(EncryptionUtil.encode("password"));
+//				user.setPhoneNumber("123456789" + i);
+//				userRepository.save(user);
+//			}
 		};
 	}
 }
