@@ -1,7 +1,7 @@
 package com.usmobile.usermanagment.controller;
 
-import com.usmobile.usermanagment.DTO.UpdateUserDTO;
-import com.usmobile.usermanagment.DTO.UserDTO;
+import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UserDTO;
 import com.usmobile.usermanagment.service.UserManagementService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

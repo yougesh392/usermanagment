@@ -1,8 +1,8 @@
 package com.usmobile.usermanagment.service;
 
-import com.usmobile.usermanagment.DAO.UserDAO;
-import com.usmobile.usermanagment.DTO.UpdateUserDTO;
-import com.usmobile.usermanagment.DTO.UserDTO;
+import com.usmobile.usermanagment.entity.User;
+import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UserDTO;
 import com.usmobile.usermanagment.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,15 +34,15 @@ public class UserManagmentServiceTest {
         userDTO.setPassword("password");
         userDTO.setPhoneNumber("1234567890");
 
-        UserDAO userDAO = new UserDAO();
-        userDAO.setId("123");
-        userDAO.setFirstName("test");
-        userDAO.setLastName("test");
-        userDAO.setEmail("john.doe@example.com");
-        userDAO.setPassword("password");
-        userDAO.setPhoneNumber("1234567890");
+        User user = new User();
+        user.setId("123");
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setEmail("john.doe@example.com");
+        user.setPassword("password");
+        user.setPhoneNumber("1234567890");
 
-        when(userRepository.insert((UserDAO) any())).thenReturn(userDAO);
+        when(userRepository.insert((User) any())).thenReturn(user);
 
         UserDTO createdUser = userManagementService.createUser(userDTO);
 
@@ -58,14 +58,14 @@ public class UserManagmentServiceTest {
         userDTO.setFirstName("test");
         userDTO.setLastName("test");
         userDTO.setEmail("john.doe@example.com");
-        UserDAO userDAO = new UserDAO();
-        userDAO.setId("123");
-        userDAO.setFirstName("test");
-        userDAO.setLastName("test");
-        userDAO.setEmail("john.doe@example.com");
+        User user = new User();
+        user.setId("123");
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setEmail("john.doe@example.com");
 
-        when(userRepository.findById("123")).thenReturn(Optional.of(userDAO));
-        when(userRepository.save(any(UserDAO.class))).thenReturn(userDAO);
+        when(userRepository.findById("123")).thenReturn(Optional.of(user));
+        when(userRepository.save(any(User.class))).thenReturn(user);
 
         UpdateUserDTO updatedUser = userManagementService.updateUser(userDTO);
 

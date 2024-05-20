@@ -1,11 +1,11 @@
 package com.usmobile.usermanagment.utils;
 
-import com.usmobile.usermanagment.DAO.UserDAO;
-import com.usmobile.usermanagment.DTO.UserDTO;
+import com.usmobile.usermanagment.entity.User;
+import com.usmobile.usermanagment.model.UserDTO;
 
 public class UserMapper {
-    public static UserDAO dtoToDao(UserDTO userDTO) {
-        UserDAO user = new UserDAO();
+    public static User dtoToDao(UserDTO userDTO) {
+        User user = new User();
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
@@ -13,7 +13,7 @@ public class UserMapper {
         user.setPhoneNumber(userDTO.getPhoneNumber());
         return user;
     }
-    public static UserDTO daoToDto(UserDAO userDAO) {
+    public static UserDTO daoToDto(User userDAO) {
         UserDTO user = new UserDTO();
         user.setUserId(userDAO.getId());
         user.setFirstName(userDAO.getFirstName());

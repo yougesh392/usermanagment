@@ -1,8 +1,8 @@
 package com.usmobile.usermanagment;
 
-import com.usmobile.usermanagment.DAO.UserDAO;
-import com.usmobile.usermanagment.repository.UserRepository;
-import com.usmobile.usermanagment.utils.EncryptionUtil;
+import com.usmobile.usermanagment.model.UserDTO;
+import com.usmobile.usermanagment.service.UserManagementService;
+import com.usmobile.usermanagment.utils.RandomNumberGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,19 +21,17 @@ public class UserManagmentApplication {
 	* loads the test data into the database
 	* */
 	@Bean
-	CommandLineRunner runner(UserRepository userRepository) {
+	CommandLineRunner runner(UserManagementService userService) {
 		return args -> {
-
-
-//			for (int i = 1; i <= 10; i++) {
-//				UserDAO user = new UserDAO();
-//				user.setFirstName("Test" + i);
-//				user.setLastName("User");
-//				user.setEmail("test" + i + "@example.com");
-//				user.setPassword(EncryptionUtil.encode("password"));
-//				user.setPhoneNumber("123456789" + i);
-//				userRepository.save(user);
-//			}
+			for (int i = 1; i <= 10; i++) {
+				UserDTO user = new UserDTO();
+				user.setFirstName("Test");
+				user.setLastName("User");
+				user.setEmail("test" + i + "@example.com");
+				user.setPassword("password" + i);
+				user.setPhoneNumber(RandomNumberGenerator.generateRandomCTN());
+				userService.createUser(user);
+			}
 		};
 	}
 }

@@ -1,6 +1,5 @@
-package com.usmobile.usermanagment.DAO;
+package com.usmobile.usermanagment.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +19,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "User entity")
-public class UserDAO {
+public class User {
     @Id
     private String id;
     private String firstName;

@@ -1,7 +1,7 @@
 package com.usmobile.usermanagment.utils;
 
-import com.usmobile.usermanagment.DTO.UpdateUserDTO;
-import com.usmobile.usermanagment.DTO.UserDTO;
+import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
