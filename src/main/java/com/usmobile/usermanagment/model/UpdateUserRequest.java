@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateUserDTO {
+public class UpdateUserRequest {
     @Schema(description = "Id of the User", example = "123")
     private String userId;
     @Schema(description = "First name of the User", example = "John")

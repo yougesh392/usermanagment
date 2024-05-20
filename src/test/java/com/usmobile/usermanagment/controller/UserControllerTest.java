@@ -1,6 +1,6 @@
 package com.usmobile.usermanagment.controller;
 
-import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UpdateUserRequest;
 import com.usmobile.usermanagment.model.UserDTO;
 import com.usmobile.usermanagment.service.UserManagementService;
 import org.junit.jupiter.api.Test;
@@ -59,7 +59,7 @@ public class UserControllerTest {
     }
     @Test
     public void testUpdateUser() throws Exception {
-        UpdateUserDTO user = new UpdateUserDTO();
+        UpdateUserRequest user = new UpdateUserRequest();
         user.setUserId("123");
         user.setFirstName("test");
         user.setLastName("test");

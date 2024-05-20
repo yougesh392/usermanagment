@@ -1,7 +1,7 @@
 package com.usmobile.usermanagment.service;
 
 import com.usmobile.usermanagment.entity.User;
-import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UpdateUserRequest;
 import com.usmobile.usermanagment.model.UserDTO;
 import com.usmobile.usermanagment.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ public class UserManagmentServiceTest {
 
     @Test
     public void testUpdateUser() throws Exception {
-        UpdateUserDTO userDTO = new UpdateUserDTO();
+        UpdateUserRequest userDTO = new UpdateUserRequest();
         userDTO.setUserId("123");
         userDTO.setFirstName("test");
         userDTO.setLastName("test");
@@ -67,7 +67,7 @@ public class UserManagmentServiceTest {
         when(userRepository.findById("123")).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
 
-        UpdateUserDTO updatedUser = userManagementService.updateUser(userDTO);
+        UpdateUserRequest updatedUser = userManagementService.updateUser(userDTO);
 
         assertEquals(userDTO.getFirstName(), updatedUser.getFirstName());
         assertEquals(userDTO.getLastName(), updatedUser.getLastName());

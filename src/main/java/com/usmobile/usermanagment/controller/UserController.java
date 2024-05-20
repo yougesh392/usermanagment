@@ -1,6 +1,6 @@
 package com.usmobile.usermanagment.controller;
 
-import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UpdateUserRequest;
 import com.usmobile.usermanagment.model.UserDTO;
 import com.usmobile.usermanagment.service.UserManagementService;
 import com.usmobile.usermanagment.utils.ApiError;
@@ -50,8 +50,8 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiError.class))),
     })
-    public ResponseEntity<UpdateUserDTO> updateUser(@RequestBody UpdateUserDTO user) throws Exception {
-        UpdateUserDTO createdUser = userManagementService.updateUser(user);
+    public ResponseEntity<UpdateUserRequest> updateUser(@RequestBody UpdateUserRequest user) throws Exception {
+        UpdateUserRequest createdUser = userManagementService.updateUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
     @GetMapping("/{userId}")

@@ -2,7 +2,7 @@ package com.usmobile.usermanagment.service;
 
 import com.usmobile.usermanagment.entity.User;
 import com.usmobile.usermanagment.model.BillingCycleRequest;
-import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UpdateUserRequest;
 import com.usmobile.usermanagment.model.UserDTO;
 import com.usmobile.usermanagment.repository.UserRepository;
 import com.usmobile.usermanagment.service.external.BillingCycleService;
@@ -55,7 +55,7 @@ public class UserManagementService {
         billcycle.setPhoneNumber(user.getPhoneNumber());
         billingCycleService.callBillingCycleManagement(billcycle);
     }
-    public UpdateUserDTO updateUser(UpdateUserDTO user) throws Exception{
+    public UpdateUserRequest updateUser(UpdateUserRequest user) throws Exception{
         ValidationUtil.validateUpdateUser(user);
         Optional<User> optionalUserDAO = userRepository.findById(user.getUserId());
         if (optionalUserDAO.isPresent()) {

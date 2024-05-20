@@ -1,6 +1,6 @@
 package com.usmobile.usermanagment.utils;
 
-import com.usmobile.usermanagment.model.UpdateUserDTO;
+import com.usmobile.usermanagment.model.UpdateUserRequest;
 import com.usmobile.usermanagment.model.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,7 +38,7 @@ public class ValidationUtil {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "last cannot be empty or invalid");
         }
     }
-    public static void validateUpdateUser(UpdateUserDTO user) {
+    public static void validateUpdateUser(UpdateUserRequest user) {
         if (user.getEmail()== null || !isValidEmail(user.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email cannot be empty or invalid");
         }
